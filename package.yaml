@@ -1,0 +1,28 @@
+name:                swatson555-blog-compiler
+version:             0.1.0.0
+github:              "swatson555/swatson555-blog-compiler"
+license:             BSD2
+author:              "Steven A. Watson"
+maintainer:          "66756748+swatson555@users.noreply.github.com"
+copyright:           "2018 Steven Watson"
+
+extra-source-files:
+- Readme.md
+- License
+
+description:         Please see the README on GitHub at <https://github.com/swatson555/swatson555-blog-compiler#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+executables:
+  blog:
+    main:                site.hs
+    source-dirs:         .
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hakyll
+    - pandoc
