@@ -17,8 +17,9 @@ feedConfig = FeedConfiguration
 
 
 config = defaultConfiguration
-    { deployCommand = "rsync --checksum -a _site/. ../"
+    { deployCommand = "`pwd`/deploy"
     }
+
 
 loadPostWriter = do
     template <- readFile "./templates/toc.html"
