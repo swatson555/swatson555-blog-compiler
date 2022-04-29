@@ -1,8 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 
+import Prelude hiding (readFile)
 import Data.Monoid (mappend)
+import Data.Functor.Identity (runIdentity)
 import Hakyll
 import Text.Pandoc
+import Text.Pandoc.UTF8 (readFile)
 
 feedConfig = FeedConfiguration
     { feedTitle       = "Steven's Blog"
@@ -17,6 +20,16 @@ config = defaultConfiguration
     { deployCommand = "rsync --checksum -a _site/. ../"
     }
 
+loadPostWriter = do
+    template <- readFile "./templates/toc.html"
+    let compliedTemplate  = either error id . runIdentity . compileTemplate "" $ template
+
+    return defaultHakyllWriterOptions
+        { writerTableOfContents = True
+        , writerTOCDepth        = 1
+        , writerTemplate        = Just compliedTemplate
+        }
+
 
 postCtx =
     dateField "date" "%B %d, %Y"     `mappend`
@@ -25,6 +38,8 @@ postCtx =
 
 
 main = do
+    postWriter <- loadPostWriter
+
     hakyllWith config $ do
         match "templates/*" $ compile templateBodyCompiler
 
@@ -38,7 +53,7 @@ main = do
 
         match "posts/**" $ do
             route $ setExtension "html"
-            compile $ pandocCompilerWith defaultHakyllReaderOptions defaultHakyllWriterOptions
+            compile $ pandocCompilerWith defaultHakyllReaderOptions postWriter
                 >>= loadAndApplyTemplate "templates/article.html" postCtx
                 >>= loadAndApplyTemplate "templates/default.html" postCtx
                 >>= relativizeUrls
