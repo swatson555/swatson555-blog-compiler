@@ -1,6 +1,6 @@
 ---
 img: tiger-book.png
-title: Essentials of Compilation & The Tiger Book
+title: Essentials of Compilation & Modern Compiler Implementation in C
 abstract: This review goes over two undergraduate textbooks on compilers that have been used autodidactically. The books are shown compared to each other, in the context of their supplementary material, and in of themselves.
 ---
 
