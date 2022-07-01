@@ -74,7 +74,7 @@ main = do
                           posts
 
         pagination <- buildPaginateWith
-          (sortRecentFirst >=> return . paginateEvery 4) "posts/**"
+          (sortRecentFirst >=> return . paginateEvery 6) "posts/**"
           (\pageNum -> if pageNum == 1 then "index.html" else fromCapture "*.html" (show pageNum))
 
         paginateRules pagination $ \pageNum patt -> do
