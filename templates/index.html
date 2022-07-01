@@ -1,0 +1,23 @@
+<section class="articles">
+  $for(posts)$
+  <div class="article">
+    <a href="$url$" target="_self">
+      <span><h2>$title$</h2></span><br>
+      <time datetime="$datetime$">$date$</time><br>
+      $if(img)$
+      <img src='/img/$img$' alt='$img$'></img></a>
+    $else$
+</a>
+$endif$
+<p>$abstract$</p>
+</div>
+$endfor$
+<div class="pagination" style="text-align: center; padding-bottom: 10px;">
+  $if(previousPageUrl)$
+  <a href="$previousPageUrl$"><h2><<</h2></a>
+  $endif$
+  $if(nextPageUrl)$
+  <a href="$nextPageUrl$"><h2>>></h2></a>
+  $endif$
+</div>
+</section>

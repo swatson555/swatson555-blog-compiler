@@ -3,6 +3,7 @@
 import Prelude hiding (readFile)
 import Data.Monoid (mappend)
 import Data.Functor.Identity (runIdentity)
+import Control.Monad
 import Hakyll
 import Text.Pandoc
 import Text.Pandoc.UTF8 (readFile)
@@ -63,20 +64,6 @@ main = do
                 >>= loadAndApplyTemplate "templates/default.html" postCtx
                 >>= relativizeUrls
 
-        match "index.html" $ do
-            route idRoute
-            compile $ do
-                posts <- recentFirst =<< loadAll "posts/**"
-                let indexCtx =
-                        listField "posts" postCtx (return posts) `mappend`
-                        constField "title" "Steven's Journal"    `mappend`
-                        defaultContext
-
-                getResourceBody
-                    >>= applyAsTemplate indexCtx
-                    >>= loadAndApplyTemplate "templates/default.html" indexCtx
-                    >>= relativizeUrls
-
         create ["rss.xml"] $ do
             route idRoute
             compile $ do
@@ -85,3 +72,21 @@ main = do
                 renderRss feedConfig
                           (defaultContext `mappend` constField "description" "")
                           posts
+
+        pagination <- buildPaginateWith
+          (sortRecentFirst >=> return . paginateEvery 4) "posts/**"
+          (\pageNum -> if pageNum == 1 then "index.html" else fromCapture "*.html" (show pageNum))
+
+        paginateRules pagination $ \pageNum patt -> do
+          route idRoute
+          compile $ do
+            posts <- recentFirst =<< loadAll patt
+            let ctx =
+                  listField "posts" postCtx (return posts)
+                  <> constField "title" "Steven's Journal"
+                  <> paginateContext pagination pageNum
+                  <> defaultContext
+            makeItem ""
+              >>= loadAndApplyTemplate "templates/index.html" ctx
+              >>= loadAndApplyTemplate "templates/default.html" ctx
+              >>= relativizeUrls
