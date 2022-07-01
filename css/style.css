@@ -105,8 +105,12 @@ div.article {
     margin-bottom: 30px;
 }
 
+div.article a{
+    text-decoration: none;
+}
+
 section.articles h2 {
-    display: inline-block;
+    display: inline;
     background-color: #0B1B1F;
     color: #FAF8F8;
 
@@ -128,6 +132,7 @@ section.articles time {
 
     padding-left: 4px;
     padding-right: 4px;
+    margin-top: 4px;
 }
 
 section.articles img {
