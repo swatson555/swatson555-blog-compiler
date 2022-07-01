@@ -10,10 +10,6 @@ body {
     background-color: #0B1B1F;
     color: #FAF8F8;
 }
-::-moz-selection {
-    background-color: #0B1B1F;
-    color: #FAF8F8;
-}
 
 h1 { font-family: 'Noto Serif', serif; font-size: xx-large; margin-bottom: 0.25em; }
 h2 { font-family: 'Noto Serif', serif; font-size: x-large; margin-bottom: 0.25em; }
