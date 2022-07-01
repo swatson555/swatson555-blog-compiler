@@ -20,10 +20,6 @@ h2 { font-family: 'Noto Serif', serif; font-size: x-large; margin-bottom: 0.25em
 h3 { font-family: 'Noto Serif', serif; font-size: larger; margin-bottom: 0.25em; }
 h4 { font-family: 'Noto Serif', serif; font-size: large; margin-bottom: 0.25em; }
 
-
-
-/*
-*/
 nav.header {
     display: flex;
     flex-direction: column;
@@ -98,7 +94,6 @@ nav.header ul li a {
     }
 }
 
-
 section.articles {
     margin: 0 auto;
     width: 800px;
@@ -144,7 +139,6 @@ section.articles img {
     margin: 0 auto;
     margin-top: 10px;
     width: 500px;
-    height: 400px;
 }
 
 section.articles p {
@@ -162,14 +156,9 @@ section.articles p {
 @media only screen and (max-width: 540px) {
     section.articles img {
         width: 90vw;
-        height: 72vw;
     }
 }
 
-
-/*
-Article
-*/
 article {
     box-shadow: 2px 4px 5px 2px #C5CBCB;
 
@@ -205,9 +194,6 @@ article div.sourceCode {
     margin-left: 0px;
 }
 
-/*
-Header
-*/
 article header h1 {
     margin-top: 0px;
 }
@@ -248,9 +234,6 @@ article header nav {
     margin: auto;
 }
 
-/*
-Figures
-*/
 article img {
     backface-visibility: hidden;
     box-sizing: border-box;
@@ -260,9 +243,6 @@ article img {
     margin: 0 auto;
 }
 
-/*
-Comment Section
-*/
 section {
     width: 700px;
     margin: 0px auto;
@@ -271,9 +251,6 @@ section {
     padding-right: 15px;
 }
 
-/*
-    Mobile CSS
-*/
 @media only screen and (max-width: 900px) {
     section {
         width: 90vw;
