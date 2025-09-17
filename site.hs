@@ -8,20 +8,6 @@ import Hakyll
 import Text.Pandoc
 import Text.Pandoc.UTF8 (readFile)
 
-feedConfig = FeedConfiguration
-    { feedTitle       = "Steven's Blog"
-    , feedDescription = "This is the homepage and blog of Steven Watson."
-    , feedAuthorName  = "Steven Watson"
-    , feedAuthorEmail = "66756748+swatson555@users.noreply.github.com"
-    , feedRoot        = "https://swatson555.github.io/"
-    }
-
-
-config = defaultConfiguration
-    { deployCommand = "`pwd`/deploy"
-    }
-
-
 loadPostWriter = do
     template <- readFile "./templates/toc.html"
     let compliedTemplate  = either error id . runIdentity . compileTemplate "" $ template
@@ -42,7 +28,7 @@ postCtx =
 main = do
     postWriter <- loadPostWriter
 
-    hakyllWith config $ do
+    hakyllWith defaultConfiguration $ do
         match "templates/*" $ compile templateBodyCompiler
 
         match "favicon.ico" $ do
@@ -65,15 +51,6 @@ main = do
                 >>= loadAndApplyTemplate "templates/article.html" postCtx
                 >>= loadAndApplyTemplate "templates/default.html" postCtx
                 >>= relativizeUrls
-
-        create ["rss.xml"] $ do
-            route idRoute
-            compile $ do
-                posts <- fmap (take 10) . recentFirst =<< loadAll "posts/**"
-
-                renderRss feedConfig
-                          (defaultContext `mappend` constField "description" "")
-                          posts
 
         pagination <- buildPaginateWith
           (sortRecentFirst >=> return . paginateEvery 6) "posts/**"

@@ -31,7 +31,7 @@ The lexing into tokens was done using `lex` just like in the canonical implement
 
 ## Parsing
 
-The parsing into an AST was done using `yacc` just like in the canonical implementation of Standard ML. Many programs parse well, although quite a few don't. Despite using `yacc`, Standard ML isn't a LALR (1) language, and likewise, even this subset of the language is difficult to parse, but for the purposes of studying the book, it's sufficient.
+The parsing into an AST was done using `yacc` just like in the canonical implementation of Standard ML. Many programs parse well, although quite a few don't. Despite using `yacc`, Standard ML isn't a LALR (1) language, and likewise, even this subset of the language is difficult to parse, but for the purposes of studying the book it's sufficient.
 
 In fact, it's better than sufficient. It's much better than keeping large blocks of AST values in the source files. Better to reason about. Better to work with even if it's not perfect.
 
