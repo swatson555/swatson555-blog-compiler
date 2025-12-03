@@ -14,12 +14,10 @@ This project is a static site generator built with **Haskell** and **Hakyll**. I
 The build graph transforms source content into deployable artifacts through a unidirectional pipeline.
 
 ```mermaid
-graph LR
-    A[Source: Markdown] -->|Pandoc Reader| B(AST)
-    B -->|Transformation| C{Context & Metadata}
-    C -->|Templating| D(HTML Fragment)
-    D -->|Layout Application| E[Final Artifact]
-    style B fill:#50C6D1,stroke:#0B1B1F,stroke-width:2px,color:#0B1B1F
+flowchart LR
+    A([Source: Markdown]) --> B(Pandoc Reader)
+    B -->|AST| C(Templating)
+    C --> D([Final Artifact])
 ```
 
 ## Usage
